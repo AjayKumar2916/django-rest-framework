@@ -1,0 +1,105 @@
+Django Rest Framework Basic CRUD
+
+
+Django REST framework is a powerful and flexible toolkit for building Web APIs. In this article we going to see basic CRUD operation for a Contact Table.
+Here we will test the API urls using Postman tool.
+
+
+Installation
+
+pip install djangorestframework
+
+models.py
+
+from django.db import models
+
+class Contact(models.Model):
+    name = models.CharField(max_length=128)
+    email = models.CharField(max_length=128)
+    phone = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.name
+
+serializers.py
+
+from rest_framework import serializers
+
+from contact.models import Contact
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = "__all__"
+
+
+Contact List
+
+urls.py
+
+url(r'api/contact/list/$', ContacttList.as_view()),
+
+views.py
+
+from rest_framework.generics import ListAPIView
+
+class ContacttList(ListAPIView):
+    queryset = Contact.objects.all().order_by('-id')
+    serializer_class = ContactSerializer
+
+
+
+Add Contact
+
+urls.py
+url(r'api/contact/add/$', AddContact.as_view()),
+
+views.py
+
+from rest_framework.generics import CreateAPIView
+
+class AddContact(CreateAPIView):
+    queryset = Contact.objects.all().order_by('-id')
+    serializer_class = ContactSerializer
+
+Retrieve Contact
+
+urls.py
+url(r'api/contact/(?P<pk>[0-9]+)/$', RetrieveContact.as_view()),
+
+views.py
+
+from rest_framework.generics import RetrieveAPIView
+
+class RetrieveContact(RetrieveAPIView):
+    queryset = Contact.objects.all().order_by('-id')
+    serializer_class = ContactSerializer
+
+Edit Contact
+
+urls.py
+url(r'api/contact/(?P<pk>[0-9]+)/edit/$', EditContact.as_view()),
+
+views.py
+
+from rest_framework.generics import UpdateAPIView
+
+class EditContact(UpdateAPIView):
+    queryset = Contact.objects.all().order_by('-id')
+    serializer_class = ContactSerializer
+
+Delete Contact
+
+urls.py
+url(r'api/contact/(?P<pk>[0-9]+)/delete/$', DeleteContact.as_view()),
+
+views.py
+
+from rest_framework.generics import DestroyAPIView
+
+class DeleteContact(DestroyAPIView):
+    queryset = Contact.objects.all().order_by('-id')
+    serializer_class = ContactSerializer
+
+
+

@@ -1,0 +1,12 @@
+1. clone the project to the local directory
+2. cd django-rest-framework #Change to project dir
+3. virtualenv venv #Create virtual environment
+4. source venv/bin/activate #Activate virtual environment
+5. pip install -r requirements.txt #Install the requirements
+6. cd drf
+7. python manage.py makemigrations
+8. python manage.py migrate
+9. python manage.py createsuperuser
+9. python auto_populate.py #To Insert some data into database
+10. python manage.py runserver # To run the App
+11. Enjoy the API with the host 127.0.0.1:8000
