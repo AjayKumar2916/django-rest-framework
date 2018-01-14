@@ -9,6 +9,20 @@ Installation
 
 pip install djangorestframework
 
+Add 'rest_framework' to your INSTALLED_APPS setting.
+
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+]
+
+If you're intending to use the browsable API, add the following to your root urls.py.
+
+urlpatterns = [
+    ...
+    url(r'^api-auth/', include('rest_framework.urls'))
+]
+
 models.py
 
 from django.db import models
@@ -101,5 +115,9 @@ class DeleteContact(DestroyAPIView):
     queryset = Contact.objects.all().order_by('-id')
     serializer_class = ContactSerializer
 
+You will find the source code here.
 
+That's it and now we can enjoy the Restfull API's with django and I hope you enjoyed this article, if you face any issues or problem, please feel free to give your feedbacks in the comment secton.
+
+https://blog.merakiinfotech.com/11be01e90d/django-rest-framework-basic-crud/
 
